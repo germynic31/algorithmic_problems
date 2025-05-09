@@ -4,7 +4,6 @@
 
 # You can return the answer in any order.
 
- 
 
 # Example 1:
 
@@ -19,7 +18,7 @@
 
 # Input: nums = [3,3], target = 6
 # Output: [0,1]
- 
+
 
 # Constraints:
 
@@ -29,28 +28,36 @@
 # Only one valid answer exists.
 
 
-from typing import List
-from copy import copy
+# class Solution:
+#     def twoSum(self, nums: List[int], target: int) -> List[int]:
+#         cursor: int = 0
+#         i = 0
+#         j = 1
+#         while True:
+#             if nums[i] + nums[j] == target:
+#                 return [i, j]
+#             if i == len(nums) - 2:
+#                 return
+#             if j == len(nums) - 1:
+#                 cursor += 1
+#                 i = copy(cursor)
+#                 j = copy(cursor) + 1
+#             else:
+#                 j += 1
 
 
 class Solution:
-    def twoSum(self, nums: List[int], target: int) -> List[int]:
-        cursor: int = 0
-        i = 0
-        j = 1
-        while True:
-            if nums[i] + nums[j] == target:
-                return [i, j]
-            if i == len(nums) - 2:
-                return
-            if j == len(nums) - 1:
-                cursor += 1
-                i = copy(cursor)
-                j = copy(cursor) + 1
-            else:
-                j += 1
+    def twoSum(self, nums: list[int], target: int) -> list[int]:
+        num_index_dict = {}
+
+        for i, num in enumerate(nums):
+            complement = target - num
+            if complement in num_index_dict:
+                return [num_index_dict[complement], i]
+            num_index_dict[num] = i
+        return []
 
 
 sol = Solution()
 
-print(sol.twoSum([-1,-2,-3,-4,-5], -8))
+print(sol.twoSum([-1, -2, -3, -4, -5], -8))
